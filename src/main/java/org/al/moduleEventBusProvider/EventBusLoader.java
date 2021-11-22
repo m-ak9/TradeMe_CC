@@ -1,6 +1,6 @@
 package org.al.moduleEventBusProvider;
 
-import org.al.common.GetMemberEvent;
+import org.al.common.domain.GetMemberEvent;
 import org.al.common.domain.ApprovedMemberEvent;
 import org.al.common.domain.ProcessPaymentEvent;
 import org.al.common.domain.RegisterMemberEvent;

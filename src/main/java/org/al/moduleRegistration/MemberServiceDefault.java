@@ -4,10 +4,12 @@ import org.al.common.domain.member.Member;
 import org.al.common.domain.member.MemberId;
 import org.al.common.domain.member.MemberRepository;
 import org.al.common.domain.member.MemberService;
+import org.al.common.kernel.Service;
 import org.al.infrastructure.InMemoryMemberRepository;
 
 import java.util.List;
 
+@Service
 public class MemberServiceDefault implements MemberService {
 
     private final MemberRepository memberRepository = InMemoryMemberRepository.getInstance();

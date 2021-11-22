@@ -1,10 +1,12 @@
 package org.al.modulePayment.domain;
 
 import org.al.common.domain.payment.Payment;
+import org.al.common.kernel.Pattern;
 import org.al.common.kernel.PaymentException;
 
 import java.util.logging.Logger;
 
+@Pattern
 public class ContractorPaymentStrategy implements PaymentStrategy {
     private static final Logger LOGGER = Logger.getLogger(ContractorPaymentStrategy.class.getName());
 

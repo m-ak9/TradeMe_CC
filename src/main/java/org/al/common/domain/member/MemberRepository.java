@@ -1,5 +1,7 @@
 package org.al.common.domain.member;
 
+import org.al.common.kernel.Repository;
+
 import java.util.List;
 
 public interface MemberRepository {

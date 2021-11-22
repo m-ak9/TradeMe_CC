@@ -1,7 +1,7 @@
 package org.al.moduleQuery;
 
 
-import org.al.common.GetMemberEvent;
+import org.al.common.domain.GetMemberEvent;
 import org.al.common.domain.member.MemberService;
 import org.al.event.Subscriber;
 import org.al.moduleEventBusProvider.EventBusProvider;

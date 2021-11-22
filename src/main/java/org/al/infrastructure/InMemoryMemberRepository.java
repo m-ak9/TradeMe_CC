@@ -3,6 +3,7 @@ package org.al.infrastructure;
 import org.al.common.domain.member.Member;
 import org.al.common.domain.member.MemberId;
 import org.al.common.domain.member.MemberRepository;
+import org.al.common.kernel.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+@Repository
 public final class InMemoryMemberRepository implements MemberRepository {
     private final AtomicInteger         counter;
     private final Map<MemberId, Member> data;

@@ -3,11 +3,13 @@ package org.al.moduleRegistration;
 import org.al.common.domain.ProcessPaymentEvent;
 import org.al.common.domain.member.Member;
 import org.al.common.domain.member.MemberService;
+import org.al.common.kernel.Service;
 import org.al.moduleEventBusProvider.EventBusProvider;
 import org.al.moduleRegistration.domain.RegisterService;
 
 import java.util.logging.Logger;
 
+@Service
 public class RegisterServiceDefault implements RegisterService {
     private static final Logger LOGGER = Logger.getLogger(RegisterServiceDefault.class.getName());
 

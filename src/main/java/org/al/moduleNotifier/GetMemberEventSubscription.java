@@ -1,7 +1,7 @@
 package org.al.moduleNotifier;
 
 
-import org.al.common.GetMemberEvent;
+import org.al.common.domain.GetMemberEvent;
 import org.al.common.domain.member.DefaultMember;
 import org.al.event.Subscriber;
 

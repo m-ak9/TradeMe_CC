@@ -3,7 +3,9 @@ package org.al.modulePayment.domain;
 import org.al.common.domain.member.Member;
 import org.al.common.domain.member.MemberType;
 import org.al.common.kernel.NotValidAttributeException;
+import org.al.common.kernel.Pattern;
 
+@Pattern
 public final class PaymentStrategyFactory {
 
     private PaymentStrategyFactory() {

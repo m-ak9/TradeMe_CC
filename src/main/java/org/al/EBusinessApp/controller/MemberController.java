@@ -1,6 +1,6 @@
 package org.al.EBusinessApp.controller;
 
-import org.al.common.GetMemberEvent;
+import org.al.common.domain.GetMemberEvent;
 import org.al.common.domain.RegisterMemberEvent;
 import org.al.common.domain.address.AddressFactory;
 import org.al.common.domain.member.Member;

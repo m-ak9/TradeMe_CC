@@ -3,9 +3,11 @@ package org.al.moduleQuery.infrastructure;
 import org.al.common.domain.member.Member;
 import org.al.common.domain.member.MemberId;
 import org.al.common.domain.member.MemberRepository;
+import org.al.common.kernel.Repository;
 
 import java.util.List;
 
+@Repository
 public final class JdbcMemberFetchOnlyRepository implements MemberRepository {
 
     @Override

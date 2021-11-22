@@ -1,4 +1,4 @@
-package org.al.common;
+package org.al.common.domain;
 
 
 import org.al.common.domain.member.Member;

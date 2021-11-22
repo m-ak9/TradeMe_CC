@@ -4,11 +4,13 @@ import org.al.common.domain.member.Member;
 import org.al.common.domain.member.MemberId;
 import org.al.common.domain.member.MemberRepository;
 import org.al.common.domain.member.MemberService;
+import org.al.common.kernel.Service;
 import org.al.infrastructure.InMemoryMemberRepository;
 
 import java.util.List;
 import java.util.logging.Logger;
 
+@Service
 public class MemberServiceFetchOnly implements MemberService {
     private static final Logger LOGGER = Logger.getLogger(MemberServiceFetchOnly.class.getName());
 

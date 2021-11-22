@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) {
         System.out.println("-----------Program Starting ------------\n");
 
-        System.out.println("Simulate arriving request for Persona 1 the tradesman");
+        System.out.println("Simulate request for Persona 1 the tradesman");
         Member person1 = MemberBuilder.builder()
                                       .withFirstName("MICKAEL")
                                       .withLastName("AKNINE")
@@ -38,7 +38,7 @@ public class App {
             e.printStackTrace();
         }
 
-        System.out.println("Simulate arriving request for Persona 2 the contractor");
+        System.out.println("Simulate request for Persona 2 the contractor");
         Member person2 = MemberBuilder.builder()
                                       .withFirstName("KAEL")
                                       .withLastName("NINE")

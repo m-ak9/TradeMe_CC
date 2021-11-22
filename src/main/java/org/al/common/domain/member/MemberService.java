@@ -1,5 +1,7 @@
 package org.al.common.domain.member;
 
+import org.al.common.kernel.Service;
+
 import java.util.List;
 
 public interface MemberService {

@@ -1,5 +1,8 @@
 package org.al.common.domain.address;
 
+import org.al.common.kernel.Pattern;
+
+@Pattern
 public final class AddressFactory {
 
     private AddressFactory() {
