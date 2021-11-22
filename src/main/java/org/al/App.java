@@ -55,9 +55,8 @@ public class App {
                                       .ccv("456")
                                       .end()
                                       .build();
+
         MemberController.addMember(person2);
-
-
     }
 
 }

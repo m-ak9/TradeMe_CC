@@ -4,6 +4,7 @@ import org.al.common.domain.GetMemberEvent;
 import org.al.common.domain.ApprovedMemberEvent;
 import org.al.common.domain.ProcessPaymentEvent;
 import org.al.common.domain.RegisterMemberEvent;
+import org.al.common.kernel.Configuration;
 import org.al.event.DefaultEventBus;
 import org.al.event.Event;
 import org.al.event.EventBus;
@@ -15,6 +16,7 @@ import org.al.moduleRegistration.RegisterMemberEventSubscription;
 import java.util.HashMap;
 import java.util.List;
 
+@Configuration
 public class EventBusLoader<E extends Event> {
 
     EventBusLoader() {}
