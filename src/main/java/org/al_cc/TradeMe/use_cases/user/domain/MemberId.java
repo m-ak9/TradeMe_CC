@@ -4,15 +4,15 @@ import org.al_cc.shared_kernel.ValueObjectID;
 
 import java.util.Objects;
 
-public final class UserId implements ValueObjectID {
+public final class MemberId implements ValueObjectID {
     private final int value;
 
-    public UserId(int value) {
+    public MemberId(int value) {
         this.value = value;
     }
 
-    public static UserId of(int value) {
-        return new UserId(value);
+    public static MemberId of(int value) {
+        return new MemberId(value);
     }
 
     public int getValue() {
@@ -23,7 +23,7 @@ public final class UserId implements ValueObjectID {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserId userId = (UserId) o;
+        MemberId userId = (MemberId) o;
         return value == userId.value;
     }
 

@@ -1,9 +1,9 @@
 package org.al_cc.TradeMe.use_cases.payment.application.service;
 
-import org.al_cc.TradeMe.use_cases.payment.application.command.ProcessPayment;
 import org.al_cc.TradeMe.use_cases.payment.domain.*;
 import org.al_cc.TradeMe.use_cases.payment.domain.event.UserSubscriptionConfirmedEvent;
-import org.al_cc.TradeMe.use_cases.user.domain.User;
+import org.al_cc.TradeMe.use_cases.user.domain.Member;
+import org.al_cc.TradeMe.use_cases.user.domain.MemberId;
 import org.al_cc.TradeMe.use_cases.user.domain.UserRepository;
 import org.al_cc.shared_kernel.annotations.Service;
 import org.al_cc.shared_kernel.event.DomainEvent;
@@ -29,17 +29,16 @@ public class PaymentServiceDefault implements PaymentService {
     }
 
     @Override
-    public PaymentId process(ProcessPayment processPayment) {
-        User user = this.userRepository.findById(processPayment.userId);
+    public PaymentId process(MemberId memberId, String transactionId, String methodOfPayment, String subscriptionPlan) {
+        Member    user      = this.userRepository.findById(memberId);
         PaymentId paymentId = this.paymentRepository.nextId();
-        Price price = EuroPrice.of(10);         //Fake retrieve price from database
-
+        Price     price     = EuroPrice.of(10);         //Fake retrieve price from database
         Payment paymentToProceed = DefaultPayment.of(
-                TransactionId.of(processPayment.transactionId),
-                processPayment.userId,
+                TransactionId.of(transactionId),
+                memberId,
                 paymentId,
-                MethodOfPaymentType.fromString(processPayment.methodOfPayment),
-                SubscriptionPlanFactory.create(Objects.requireNonNull(SubscriptionType.fromString(processPayment.subscriptionPlan))),
+                MethodOfPaymentType.fromString(methodOfPayment),
+                SubscriptionPlanFactory.create(Objects.requireNonNull(SubscriptionType.fromString(subscriptionPlan))),
                 price,
                 false
         );
@@ -47,7 +46,7 @@ public class PaymentServiceDefault implements PaymentService {
         LOGGER.info("Payment started for : " + user.getLogin() + ", type= " + user.getUserType().toString() + "\n");
 
         PaymentStrategy paymentStrategy = PaymentStrategyFactory.getStrategy(
-                Objects.requireNonNull(MethodOfPaymentType.fromString(processPayment.methodOfPayment))
+                Objects.requireNonNull(MethodOfPaymentType.fromString(methodOfPayment))
         );
         Payment payment = paymentStrategy.pay(paymentToProceed);
         var paymentResult = this.paymentRepository.add(payment);

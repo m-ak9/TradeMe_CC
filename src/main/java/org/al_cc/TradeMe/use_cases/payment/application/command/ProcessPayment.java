@@ -1,6 +1,6 @@
 package org.al_cc.TradeMe.use_cases.payment.application.command;
 
-import org.al_cc.TradeMe.use_cases.user.domain.UserId;
+import org.al_cc.TradeMe.use_cases.user.domain.MemberId;
 import org.al_cc.shared_kernel.Command;
 
 /**
@@ -15,15 +15,15 @@ public final class ProcessPayment implements Command {
 
     public String transactionId;
 
-    public UserId userId;
+    public Integer memberId;
 
     public ProcessPayment(String methodOfPayment,
                           String subscriptionPlan,
                           String transactionId,
-                          UserId userId) {
+                          Integer memberId) {
         this.methodOfPayment = methodOfPayment;
         this.subscriptionPlan = subscriptionPlan;
         this.transactionId = transactionId;
-        this.userId = userId;
+        this.memberId = memberId;
     }
 }

@@ -1,6 +1,6 @@
 package org.al_cc.TradeMe.use_cases.user.domain;
 
-public interface User {
+public interface Member {
 
     String getLastname();
 
@@ -8,7 +8,7 @@ public interface User {
 
     String getLogin();
 
-    UserId getUserId();
+    MemberId getUserId();
 
     Address getAddress();
 

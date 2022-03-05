@@ -4,15 +4,15 @@ import java.util.List;
 
 public interface UserRepository {
 
-    User add(User user);
+    Member add(Member user);
 
-    User update(User user);
+    Member update(Member user);
 
-    UserId nextId();
+    MemberId nextId();
 
-    List<User> findAll();
+    List<Member> findAll();
 
-    User findById(UserId userId);
+    Member findById(MemberId userId);
 
-    List<User> findByCity(String city);
+    List<Member> findByCity(String city);
 }

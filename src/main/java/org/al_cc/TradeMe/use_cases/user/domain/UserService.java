@@ -4,14 +4,14 @@ import java.util.List;
 
 public interface UserService {
 
-    User save(User user);
+    Member save(Member user);
 
-    User update(User user);
+    Member update(Member user);
 
-    User getById(UserId userId);
+    Member getById(MemberId userId);
 
-    UserId getNextId();
+    MemberId getNextId();
 
-    List<User> getAll();
+    List<Member> getAll();
 
 }

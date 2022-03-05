@@ -1,9 +1,9 @@
 package org.al_cc.TradeMe.use_cases.user.application.command;
 
-import org.al_cc.TradeMe.use_cases.payment.application.command.ProcessPayment;
-import org.al_cc.TradeMe.use_cases.user.application.event.CreateUserEvent;
+import org.al_cc.TradeMe.use_cases.user.application.PaymentDTO;
+import org.al_cc.TradeMe.use_cases.user.application.event.ProcessPaymentEvent;
 import org.al_cc.TradeMe.use_cases.user.domain.*;
-import org.al_cc.TradeMe.use_cases.user.domain.event.UserRegistrationConfirmedEvent;
+import org.al_cc.TradeMe.use_cases.user.domain.event.UserCreatedEvent;
 import org.al_cc.TradeMe.use_cases.user.infrastructure.InMemoryUserRepository;
 import org.al_cc.shared_kernel.ApplicationEvent;
 import org.al_cc.shared_kernel.CommandHandler;
@@ -13,7 +13,7 @@ import org.al_cc.shared_kernel.event.EventDispatcher;
 
 
 @Service
-public class CreateUserCommandHandler implements CommandHandler<CreateUser, UserId> {
+public class CreateUserCommandHandler implements CommandHandler<CreateUser, MemberId> {
 
     private final UserRepository userRepository;
 
@@ -30,31 +30,30 @@ public class CreateUserCommandHandler implements CommandHandler<CreateUser, User
     }
 
     @Override
-    public UserId handle(CreateUser command) {
-        final UserId userId = userRepository.nextId();
-        final User user = UserBuilder.builder()
-                                     .withFirstName(command.firstname)
-                                     .withLastName(command.lastname)
-                                     .withLogin(command.login)
-                                     .withPassword(command.password)
-                                     .withUserId(userId)
-                                     .withUserType(command.userType)
-                                     .withAddress(AddressFactory.create(
+    public MemberId handle(CreateUser command) {
+        final MemberId memberId = userRepository.nextId();
+        final Member member = UserBuilder.builder()
+                                       .withFirstName(command.firstname)
+                                       .withLastName(command.lastname)
+                                       .withLogin(command.login)
+                                       .withPassword(command.password)
+                                       .withMemberId(memberId)
+                                       .withMemberType(command.userType)
+                                       .withAddress(AddressFactory.create(
                                              command.address.city,
                                              command.address.country,
                                              command.address.street,
                                              command.address.zipCode
                                      ))
-                                     .withMail(command.mail)
-                                     .build();
+                                       .withMail(command.mail)
+                                       .build();
+        userRepository.add(member);
 
-        userRepository.add(user);
+        PaymentDTO paymentDTO = new PaymentDTO(command.payment.methodOfPayment, command.payment.subscriptionPlan, command.payment.transactionId);
+        applicationEventDispatcher.dispatch(ProcessPaymentEvent.withPayment(memberId, paymentDTO));
 
-        ProcessPayment payment = new ProcessPayment(command.payment.methodOfPayment, command.payment.subscriptionPlan, command.payment.transactionId, user.getUserId());
-        applicationEventDispatcher.dispatch(CreateUserEvent.withPayment(payment));
+        domainEventDispatcher.dispatch(UserCreatedEvent.withUser(member));
 
-        domainEventDispatcher.dispatch(UserRegistrationConfirmedEvent.withUser(user));
-
-        return userId;
+        return memberId;
     }
 }

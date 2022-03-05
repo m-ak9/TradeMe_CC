@@ -2,6 +2,7 @@ package org.al_cc.TradeMe.use_cases.payment.application.command;
 
 import org.al_cc.TradeMe.use_cases.payment.domain.PaymentId;
 import org.al_cc.TradeMe.use_cases.payment.domain.PaymentService;
+import org.al_cc.TradeMe.use_cases.user.domain.MemberId;
 import org.al_cc.shared_kernel.CommandHandler;
 import org.al_cc.shared_kernel.annotations.Service;
 
@@ -14,6 +15,7 @@ public class ProcessPaymentCommandHandler implements CommandHandler<ProcessPayme
 
     @Override
     public PaymentId handle(ProcessPayment command) {
-        return paymentService.process(command);
+        MemberId memberId = MemberId.of(command.memberId);
+        return paymentService.process(memberId, command.transactionId, command.methodOfPayment, command.subscriptionPlan);
     }
 }

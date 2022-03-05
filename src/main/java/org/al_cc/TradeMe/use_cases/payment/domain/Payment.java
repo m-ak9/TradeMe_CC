@@ -1,12 +1,12 @@
 package org.al_cc.TradeMe.use_cases.payment.domain;
 
-import org.al_cc.TradeMe.use_cases.user.domain.UserId;
+import org.al_cc.TradeMe.use_cases.user.domain.MemberId;
 
 public interface Payment {
 
     TransactionId getTransactionId();
 
-    UserId getUserId();
+    MemberId getUserId();
 
     PaymentId getPaymentId();
 

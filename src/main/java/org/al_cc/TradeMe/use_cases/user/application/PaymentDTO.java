@@ -1,5 +1,7 @@
 package org.al_cc.TradeMe.use_cases.user.application;
 
+import org.al_cc.TradeMe.use_cases.user.domain.MemberId;
+
 public class PaymentDTO {
 
     public String methodOfPayment;

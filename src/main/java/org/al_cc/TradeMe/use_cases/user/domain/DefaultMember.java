@@ -4,18 +4,18 @@ package org.al_cc.TradeMe.use_cases.user.domain;
 import java.util.Objects;
 
 
-public class DefaultUser implements User {
+public class DefaultMember implements Member {
     private final String     lastname;
     private final String firstname;
-    private final String    login;
-    private       UserId userId;
-    private final String    password;
+    private final String   login;
+    private       MemberId userId;
+    private final String   password;
     private       Address  address;
     private final UserType userType;
     private final String   mail;
 
-    DefaultUser(String lastname, String firstname, String login, UserId userId, String password, Address address,
-                UserType userType, String mail) {
+    DefaultMember(String lastname, String firstname, String login, MemberId userId, String password, Address address,
+                  UserType userType, String mail) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.login = login;
@@ -26,9 +26,9 @@ public class DefaultUser implements User {
         this.mail = mail;
     }
 
-    public static DefaultUser of(String lastname, String firstname, String login, UserId userId, String password,
-                                 Address address, UserType userType, String mail) {
-        return new DefaultUser(lastname, firstname, login, userId, password, address, userType, mail);
+    public static DefaultMember of(String lastname, String firstname, String login, MemberId userId, String password,
+                                   Address address, UserType userType, String mail) {
+        return new DefaultMember(lastname, firstname, login, userId, password, address, userType, mail);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class DefaultUser implements User {
     }
 
     @Override
-    public UserId getUserId() {
+    public MemberId getUserId() {
         return userId;
     }
 
@@ -68,7 +68,7 @@ public class DefaultUser implements User {
 
     @Override
     public void addUserId(int id) {
-        this.userId = new UserId(id);
+        this.userId = new MemberId(id);
     }
 
     @Override

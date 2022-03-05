@@ -6,8 +6,8 @@ import org.al_cc.TradeMe.use_cases.user.application.command.CreateUser;
 import org.al_cc.TradeMe.use_cases.user.application.query.RetrieveUserById;
 import org.al_cc.TradeMe.use_cases.user.application.query.RetrieveUsers;
 import org.al_cc.TradeMe.use_cases.user.application.query.RetrieveUsersByCity;
-import org.al_cc.TradeMe.use_cases.user.domain.User;
-import org.al_cc.TradeMe.use_cases.user.domain.UserId;
+import org.al_cc.TradeMe.use_cases.user.domain.Member;
+import org.al_cc.TradeMe.use_cases.user.domain.MemberId;
 import org.al_cc.shared_kernel.CommandBus;
 import org.al_cc.shared_kernel.QueryBus;
 import org.al_cc.shared_kernel.annotations.Controller;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @ApplicationScoped
-@Path("/users")
+@Path("/member")
 public class UserController {
     private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
 
@@ -42,7 +42,7 @@ public class UserController {
     @GET()
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response getAll() {
-        final List<User> users = queryBus.send(new RetrieveUsers());
+        final List<Member> users = queryBus.send(new RetrieveUsers());
         UsersResponse usersResponseResult = new UsersResponse(
                 users.stream().map(userResponseAdapter::adapt).collect(Collectors.toList())
         );
@@ -53,7 +53,7 @@ public class UserController {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     public Response getById(@PathParam("id") int id) {
-        final User user = queryBus.send(new RetrieveUserById(id));
+        final Member user               = queryBus.send(new RetrieveUserById(id));
         UserResponse userResponseResult = userResponseAdapter.adapt(user);
         return Response.ok(userResponseResult).build();
     }
@@ -62,7 +62,7 @@ public class UserController {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/city")
     public Response getByCity(@QueryParam("city") String city) {
-        final List<User> users = queryBus.send(new RetrieveUsersByCity(city));
+        final List<Member> users = queryBus.send(new RetrieveUsersByCity(city));
         UsersResponse usersResponseResult = new UsersResponse(
                 users.stream().map(userResponseAdapter::adapt).collect(Collectors.toList())
         );
@@ -89,7 +89,7 @@ public class UserController {
                 new PaymentDTO(request.payment.methodOfPayment, request.payment.subscriptionPlan, request.payment.transactionId)
         );
 
-        UserId userId = commandBus.send(createUser);
+        MemberId userId = commandBus.send(createUser);
 
         return Response.created(URI.create("/users/" + userId.getValue())).build();
     }

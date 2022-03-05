@@ -1,12 +1,12 @@
 package org.al_cc.TradeMe.use_cases.user.application.query;
 
-import org.al_cc.TradeMe.use_cases.user.domain.User;
+import org.al_cc.TradeMe.use_cases.user.domain.Member;
 import org.al_cc.TradeMe.use_cases.user.domain.UserRepository;
 import org.al_cc.shared_kernel.QueryHandler;
 
 import java.util.List;
 
-public class RetrieveUsersHandler implements QueryHandler<RetrieveUsers, List<User>> {
+public class RetrieveUsersHandler implements QueryHandler<RetrieveUsers, List<Member>> {
 
     private final UserRepository userRepository;
 
@@ -15,7 +15,7 @@ public class RetrieveUsersHandler implements QueryHandler<RetrieveUsers, List<Us
     }
 
     @Override
-    public List<User> handle(RetrieveUsers query) {
+    public List<Member> handle(RetrieveUsers query) {
         return userRepository.findAll();
     }
 }

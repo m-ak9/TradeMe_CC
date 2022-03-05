@@ -1,11 +1,11 @@
 package org.al_cc.TradeMe.use_cases.user.application.query;
 
-import org.al_cc.TradeMe.use_cases.user.domain.User;
-import org.al_cc.TradeMe.use_cases.user.domain.UserId;
+import org.al_cc.TradeMe.use_cases.user.domain.Member;
+import org.al_cc.TradeMe.use_cases.user.domain.MemberId;
 import org.al_cc.TradeMe.use_cases.user.domain.UserRepository;
 import org.al_cc.shared_kernel.QueryHandler;
 
-public class RetrieveUserByIdHandler implements QueryHandler<RetrieveUserById, User> {
+public class RetrieveUserByIdHandler implements QueryHandler<RetrieveUserById, Member> {
 
     private final UserRepository userRepository;
 
@@ -14,7 +14,7 @@ public class RetrieveUserByIdHandler implements QueryHandler<RetrieveUserById, U
     }
 
     @Override
-    public User handle(RetrieveUserById query) {
-        return userRepository.findById(UserId.of(query.id));
+    public Member handle(RetrieveUserById query) {
+        return userRepository.findById(MemberId.of(query.id));
     }
 }

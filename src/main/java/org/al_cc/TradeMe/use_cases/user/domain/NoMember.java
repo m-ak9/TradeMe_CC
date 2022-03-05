@@ -1,6 +1,6 @@
 package org.al_cc.TradeMe.use_cases.user.domain;
 
-public class NoUser implements User {
+public class NoMember implements Member {
     @Override public String getLastname() {
         throw new UnsupportedOperationException();
     }
@@ -13,7 +13,7 @@ public class NoUser implements User {
         throw new UnsupportedOperationException();
     }
 
-    @Override public UserId getUserId() {
+    @Override public MemberId getUserId() {
         throw new UnsupportedOperationException();
     }
 

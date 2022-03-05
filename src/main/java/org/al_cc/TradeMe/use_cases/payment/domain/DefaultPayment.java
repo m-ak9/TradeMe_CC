@@ -1,12 +1,12 @@
 package org.al_cc.TradeMe.use_cases.payment.domain;
 
-import org.al_cc.TradeMe.use_cases.user.domain.UserId;
+import org.al_cc.TradeMe.use_cases.user.domain.MemberId;
 
 public final class DefaultPayment implements Payment {
 
 
     private final TransactionId                                        transactionId;
-    private final UserId                                               userId;
+    private final MemberId                                             userId;
     private       org.al_cc.TradeMe.use_cases.payment.domain.PaymentId paymentId;
     private final MethodOfPaymentType                                  methodOfPaymentType;
     private final SubscriptionPlan    subscriptionPlan;
@@ -14,7 +14,7 @@ public final class DefaultPayment implements Payment {
     private boolean             done;
 
     public DefaultPayment(TransactionId transactionId,
-                          UserId userId,
+                          MemberId userId,
                           org.al_cc.TradeMe.use_cases.payment.domain.PaymentId paymentId,
                           MethodOfPaymentType methodOfPaymentType,
                           SubscriptionPlan subscriptionPlan,
@@ -30,7 +30,7 @@ public final class DefaultPayment implements Payment {
     }
 
     public static DefaultPayment of(TransactionId transactionId,
-                                    UserId userId,
+                                    MemberId userId,
                                     org.al_cc.TradeMe.use_cases.payment.domain.PaymentId paymentId,
                                     MethodOfPaymentType methodOfPaymentType,
                                     SubscriptionPlan subscriptionPlan,
@@ -45,7 +45,7 @@ public final class DefaultPayment implements Payment {
     }
 
     @Override
-    public UserId getUserId() {
+    public MemberId getUserId() {
         return this.userId;
     }
 

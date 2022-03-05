@@ -1,26 +1,26 @@
 package org.al_cc.TradeMe.use_cases.user.domain.event;
 
-import org.al_cc.TradeMe.use_cases.user.domain.User;
+import org.al_cc.TradeMe.use_cases.user.domain.Member;
 import org.al_cc.shared_kernel.event.DomainEvent;
 import org.al_cc.shared_kernel.event.EventId;
 
 import java.time.ZonedDateTime;
 
-public class UserRegistrationConfirmedEvent implements DomainEvent {
+public class UserCreatedEvent implements DomainEvent {
     private final EventId       eventId;
     private final ZonedDateTime occurredDate;
-    private final User          user;
+    private final Member        user;
 
-    public UserRegistrationConfirmedEvent(EventId eventId,
-                                          ZonedDateTime occurredDate,
-                                          User user) {
+    public UserCreatedEvent(EventId eventId,
+                            ZonedDateTime occurredDate,
+                            Member user) {
         this.eventId = eventId;
         this.occurredDate = occurredDate;
         this.user = user;
     }
 
-    public static UserRegistrationConfirmedEvent withUser(User user) {
-        return new UserRegistrationConfirmedEvent(EventId.create(), ZonedDateTime.now(), user);
+    public static UserCreatedEvent withUser(Member user) {
+        return new UserCreatedEvent(EventId.create(), ZonedDateTime.now(), user);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class UserRegistrationConfirmedEvent implements DomainEvent {
         return this.occurredDate;
     }
 
-    public User getUser() {
+    public Member getUser() {
         return this.user;
     }
 }

@@ -2,7 +2,7 @@ package org.al_cc.TradeMe.use_cases.user;
 
 import org.al_cc.TradeMe.use_cases.payment.application.command.ProcessPayment;
 import org.al_cc.TradeMe.use_cases.payment.application.command.ProcessPaymentCommandHandler;
-import org.al_cc.TradeMe.use_cases.payment.application.event.CreateUserEventListener;
+import org.al_cc.TradeMe.use_cases.payment.application.event.ProcessPaymentEventListener;
 import org.al_cc.TradeMe.use_cases.payment.application.service.PaymentServiceDefault;
 import org.al_cc.TradeMe.use_cases.payment.domain.PaymentRepository;
 import org.al_cc.TradeMe.use_cases.payment.domain.PaymentService;
@@ -11,11 +11,11 @@ import org.al_cc.TradeMe.use_cases.payment.domain.event.UserSubscriptionConfirme
 import org.al_cc.TradeMe.use_cases.payment.infrastructure.InMemoryPaymentRepository;
 import org.al_cc.TradeMe.use_cases.user.application.command.CreateUser;
 import org.al_cc.TradeMe.use_cases.user.application.command.CreateUserCommandHandler;
-import org.al_cc.TradeMe.use_cases.user.application.event.CreateUserEvent;
+import org.al_cc.TradeMe.use_cases.user.application.event.ProcessPaymentEvent;
 import org.al_cc.TradeMe.use_cases.user.application.query.*;
 import org.al_cc.TradeMe.use_cases.user.domain.UserRepository;
-import org.al_cc.TradeMe.use_cases.user.domain.event.UserRegistrationConfirmedEvent;
-import org.al_cc.TradeMe.use_cases.user.domain.event.UserRegistrationConfirmedEventListener;
+import org.al_cc.TradeMe.use_cases.user.domain.event.UserCreatedEvent;
+import org.al_cc.TradeMe.use_cases.user.domain.event.UserCreatedEventListener;
 import org.al_cc.TradeMe.use_cases.user.exposition.UserResponseAdapter;
 import org.al_cc.TradeMe.use_cases.user.infrastructure.DefaultEventDispatcher;
 import org.al_cc.TradeMe.use_cases.user.infrastructure.InMemoryUserRepository;
@@ -40,7 +40,7 @@ public class UserConfiguration {
     @Dependent
     public EventDispatcher<ApplicationEvent> applicationEventDispatcher() {
         final Map<Class<? extends Event>, List<EventListener<? extends Event>>> listenerMap = new HashMap<>();
-        listenerMap.put(CreateUserEvent.class, List.of(new CreateUserEventListener(paymentService())));
+        listenerMap.put(ProcessPaymentEvent.class, List.of(new ProcessPaymentEventListener(paymentService())));
         return new DefaultEventDispatcher(listenerMap);
     }
 
@@ -48,7 +48,7 @@ public class UserConfiguration {
     @Dependent
     public EventDispatcher<DomainEvent> domainEventDispatcher() {
         final Map<Class<? extends Event>, List<EventListener<? extends Event>>> listenerMap = new HashMap<>();
-        listenerMap.put(UserRegistrationConfirmedEvent.class, List.of(new UserRegistrationConfirmedEventListener(new NotificationsByMail())));
+        listenerMap.put(UserCreatedEvent.class, List.of(new UserCreatedEventListener(new NotificationsByMail())));
         listenerMap.put(UserSubscriptionConfirmedEvent.class, List.of(new UserSubscriptionConfirmedEventListener(new NotificationsByMail())));
         return new DefaultEventDispatcher(listenerMap);
     }

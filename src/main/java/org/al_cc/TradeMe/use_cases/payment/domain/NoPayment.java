@@ -1,13 +1,13 @@
 package org.al_cc.TradeMe.use_cases.payment.domain;
 
-import org.al_cc.TradeMe.use_cases.user.domain.UserId;
+import org.al_cc.TradeMe.use_cases.user.domain.MemberId;
 
 public class NoPayment implements Payment {
     @Override public TransactionId getTransactionId() {
         throw new UnsupportedOperationException();
     }
 
-    @Override public UserId getUserId() {
+    @Override public MemberId getUserId() {
         throw new UnsupportedOperationException();
     }
 

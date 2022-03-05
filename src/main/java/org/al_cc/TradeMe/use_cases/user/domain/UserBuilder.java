@@ -2,9 +2,9 @@ package org.al_cc.TradeMe.use_cases.user.domain;
 
 public class UserBuilder {
     private String      lastname;
-    private String firstname;
-    private UserId userId;
-    private String login;
+    private String   firstname;
+    private MemberId userId;
+    private String   login;
     private String      password;
     private Address     address;
     private UserType    userType;
@@ -31,7 +31,7 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder withUserId(UserId userId) {
+    public UserBuilder withMemberId(MemberId userId) {
         this.userId = userId;
         return this;
     }
@@ -46,7 +46,7 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder withUserType(String usertype) {
+    public UserBuilder withMemberType(String usertype) {
         this.userType = UserType.fromString(usertype);
         return this;
     }
@@ -56,8 +56,8 @@ public class UserBuilder {
         return this;
     }
 
-    public DefaultUser build() {
-        return new DefaultUser(
+    public DefaultMember build() {
+        return new DefaultMember(
                 lastname,
                 firstname,
                 login,

@@ -2,7 +2,7 @@ package org.al_cc.TradeMe.use_cases.payment.domain.event;
 
 import org.al_cc.TradeMe.use_cases.payment.domain.NoPayment;
 import org.al_cc.TradeMe.use_cases.payment.domain.Payment;
-import org.al_cc.TradeMe.use_cases.user.domain.User;
+import org.al_cc.TradeMe.use_cases.user.domain.Member;
 import org.al_cc.shared_kernel.event.DomainEvent;
 import org.al_cc.shared_kernel.event.EventId;
 
@@ -11,12 +11,12 @@ import java.time.ZonedDateTime;
 public class UserSubscriptionConfirmedEvent implements DomainEvent {
     private final EventId       eventId;
     private final ZonedDateTime occurredDate;
-    private final User    user;
-    private final Payment payment;
+    private final Member        user;
+    private final Payment       payment;
 
     public UserSubscriptionConfirmedEvent(EventId eventId,
                                           ZonedDateTime occurredDate,
-                                          User user,
+                                          Member user,
                                           Payment payment) {
         this.eventId = eventId;
         this.occurredDate = occurredDate;
@@ -24,7 +24,7 @@ public class UserSubscriptionConfirmedEvent implements DomainEvent {
         this.payment = payment;
     }
 
-    public static UserSubscriptionConfirmedEvent withUser(User user) {
+    public static UserSubscriptionConfirmedEvent withUser(Member user) {
         return new UserSubscriptionConfirmedEvent(EventId.create(), ZonedDateTime.now(), user, new NoPayment());
     }
 
@@ -38,7 +38,7 @@ public class UserSubscriptionConfirmedEvent implements DomainEvent {
         return this.occurredDate;
     }
 
-    public User getUser() {
+    public Member getUser() {
         return this.user;
     }
     public Payment getPayment() {
